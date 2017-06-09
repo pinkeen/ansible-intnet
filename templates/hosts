@@ -1,0 +1,10 @@
+127.0.0.1 localhost localhost.localdomain localhost4 localhost4.localdomain4
+::1       localhost localhost.localdomain localhost6 localhost6.localdomain6
+
+{% if hostname is defined -%}
+    127.0.0.1 {{ hostname }}
+{% endif %}
+
+{% for item in groups['all'] if hostvars[item].intnet_iface is defined -%}
+    {{ hostvars[item].intnet_addr }} {{ hostvars[item].intnet_host }}
+{% endfor %}

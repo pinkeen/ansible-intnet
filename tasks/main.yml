@@ -1,0 +1,9 @@
+- name: Get intnet ip
+  set_fact:
+    intnet_addr: "{{ hostvars[inventory_hostname]['ansible_' ~ hostvars[inventory_hostname].intnet_iface].ipv4.address }}"
+
+- name: Build hosts file
+  template:
+    src: hosts
+    dest: /etc/hosts
+    mode: 0644
